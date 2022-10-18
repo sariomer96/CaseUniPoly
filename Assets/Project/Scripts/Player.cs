@@ -22,13 +22,32 @@ public class Player : Character
     {
         GameManager._instance.triggeredEnemyList.Remove(enemy);
     }
+    public void DisableRagdoll()
+    {
+       Rigidbody[] rb= transform.GetComponentsInChildren<Rigidbody>();
+
+       for (int i = 1; i < rb.Length; i++)
+       {
+           rb[i].isKinematic = true;
+       }
+    }
+    public void EnableRagdoll()
+    {
+        Rigidbody[] rb= transform.GetComponentsInChildren<Rigidbody>();
+        transform.GetComponent<Collider>().enabled = false;
+        transform.GetComponent<Animator>().enabled = false;
+        for (int i = 1; i < rb.Length; i++)
+        {
+            rb[i].isKinematic = false;
+        }
+    }
     public void StopAnim()
     {
         isAttack = false;
     }
     public void StartCharacter()
     {
-
+        DisableRagdoll();
         StartCoroutine("DecisionRoutine");
         StartCoroutine(state);
       

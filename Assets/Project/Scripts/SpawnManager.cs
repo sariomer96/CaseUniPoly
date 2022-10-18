@@ -1,21 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
     // Start is called before the first frame update
    [SerializeField] private Enemy enemyPref;
-    void Start()
-    {
-        StartCoroutine("SpawnRoutine");
-    }
+   public static SpawnManager _instance;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   private void Awake()
+   {
+       _instance = this;
+   }
+
+ 
     
     IEnumerator SpawnRoutine()
     {
