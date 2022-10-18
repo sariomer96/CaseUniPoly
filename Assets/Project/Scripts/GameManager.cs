@@ -58,15 +58,21 @@ public class GameManager : MonoBehaviour
             enemies[i].StopAllCoroutines();
         }
         SpawnManager._instance. StopCoroutine("SpawnRoutine");
-       
+        StartCoroutine("HitToPlayer");
     }
 
-    private void Update()
+    IEnumerator HitToPlayer()
     {
-        if (Input.GetMouseButtonDown(0))
+        while (true)
         {
-            Ray();
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray();
+            }
+
+            yield return null;
         }
+     
     }
 
     void Ray()
@@ -74,7 +80,7 @@ public class GameManager : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
-        if (Physics.Raycast(ray, out hit,LayerMask.GetMask("Player"))) {
+        if (Physics.Raycast(ray, out hit,100,LayerMask.GetMask("Player"))) {
             Transform objectHit = hit.transform;
             print(objectHit);
             player.EnableRagdoll();
