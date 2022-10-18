@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
+
+    public int totalGold = 0;
     public float maxSpawnDelay = 7f;
     public int spawnCount;
     public float enemySpawnRadius = 1f;
-  
+    public TextMeshProUGUI goldTxt;
     public GameObject sphere;
     public static GameManager _instance;
     public Joystick joystick;
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator RagdollTimer()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(60f);
         player.StopAllCoroutines();
         player.RegisterAnimation("Idle");
         Enemy[] enemies = FindObjectsOfType<Enemy>();

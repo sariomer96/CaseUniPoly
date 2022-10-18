@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,6 +53,17 @@ public class Player : Character
         StartCoroutine(state);
       
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag=="gold")
+        {
+            Destroy(other.gameObject);
+            GameManager._instance.totalGold++;
+            GameManager._instance.goldTxt.text = GameManager._instance.totalGold.ToString();
+        }
+    }
+
     public override IEnumerator MoveRoutine()
     {
         
